@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "UmaEventLibrary.h"
 
 #include <regex>
@@ -26,7 +26,7 @@ boost::optional<std::wstring> retrieve(
 {
 	// Retrieve similar strings into a string vector.
 	std::vector<std::wstring> xstrs;
-	for (; threshold > minThreshold/*kMinThreshold*/; threshold -= 0.05) {	// ­‚È‚­‚Æ‚àˆê‚Â‚ªŒ©‚Â‚©‚é‚æ‚¤‚Èè‡’l‚ğ’T‚·
+	for (; threshold > minThreshold/*kMinThreshold*/; threshold -= 0.05) {	// å°‘ãªãã¨ã‚‚ä¸€ã¤ãŒè¦‹ã¤ã‹ã‚‹ã‚ˆã†ãªé–¾å€¤ã‚’æ¢ã™
 		for (const std::wstring& query : ambiguousEventNames) {
 			dbr.retrieve(query, measure, threshold, std::back_inserter(xstrs));
 			if (xstrs.size()) {
@@ -58,7 +58,7 @@ boost::optional<std::wstring> retrieve(
 
 void	EventNameNormalize(std::wstring& eventName)
 {
-	std::wregex rx(L"iis“x[^\\j]+j");
+	std::wregex rx(L"ï¼ˆé€²è¡Œåº¦[^\\ï¼‰]+ï¼‰");
 	eventName = std::regex_replace(eventName, rx, L"");
 }
 
@@ -87,7 +87,7 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 
 					if (kMaxOption <= i) {
 						ATLASSERT(FALSE);
-						throw std::runtime_error("‘I‘ğˆ‚Ì”‚ª kMaxOption ‚ğ’´‚¦‚Ü‚·");
+						throw std::runtime_error("é¸æŠè‚¢ã®æ•°ãŒ kMaxOption ã‚’è¶…ãˆã¾ã™");
 					}
 
 					umaEvent.eventOptions[i].option = option;
@@ -101,7 +101,7 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 			std::ifstream ifs((GetExeDirectory() / "UmaMusumeLibrary.json").wstring());
 			ATLASSERT(ifs);
 			if (!ifs) {
-				throw std::runtime_error("UmaMusumeLibrary.json ‚Ì“Ç‚İ‚İ‚É¸”s");
+				throw std::runtime_error("UmaMusumeLibrary.json ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—");
 			}
 			json jsonLibrary;
 			ifs >> jsonLibrary;
@@ -129,7 +129,7 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 			std::ifstream ifs((GetExeDirectory() / "UmaMusumeLibraryRevision.json").wstring());
 			ATLASSERT(ifs);
 			if (!ifs) {
-				throw std::runtime_error("UmaMusumeLibraryRevision.json ‚Ì“Ç‚İ‚İ‚É¸”s");
+				throw std::runtime_error("UmaMusumeLibraryRevision.json ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—");
 			}
 			json jsonRevisionLibrary;
 			ifs >> jsonRevisionLibrary;
@@ -141,12 +141,12 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 
 				auto funcUpdateEventOptions = [](const CharaEvent& charaEvent, CharaEventList& charaEventList) -> bool {
 					for (auto& anotherCharaEventList : charaEventList) {
-						if (anotherCharaEventList->name == charaEvent.name) {	// ƒ\[ƒXˆê’v
+						if (anotherCharaEventList->name == charaEvent.name) {	// ã‚½ãƒ¼ã‚¹ä¸€è‡´
 							bool update = false;
 							for (auto& anotherUmaEventList : anotherCharaEventList->umaEventList) {
 								for (const auto& umaEventList : charaEvent.umaEventList) {
-									if (anotherUmaEventList.eventName == umaEventList.eventName) {	// ƒCƒxƒ“ƒg–¼ˆê’v
-										anotherUmaEventList.eventOptions = umaEventList.eventOptions;	// ‘I‘ğˆ‚ğã‘‚«
+									if (anotherUmaEventList.eventName == umaEventList.eventName) {	// ã‚¤ãƒ™ãƒ³ãƒˆåä¸€è‡´
+										anotherUmaEventList.eventOptions = umaEventList.eventOptions;	// é¸æŠè‚¢ã‚’ä¸Šæ›¸ã
 										update = true;
 									}
 								}
@@ -157,10 +157,10 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 					}
 					return false;
 				};
-				// chara/supportEventList ‚Öã‘‚«‚·‚é
+				// chara/supportEventList ã¸ä¸Šæ›¸ãã™ã‚‹
 				if (!funcUpdateEventOptions(charaEvent, m_charaEventList)) {
 					if (!funcUpdateEventOptions(charaEvent, m_supportEventList)) {
-						// ƒCƒxƒ“ƒgƒŠƒXƒg‚ÉƒCƒxƒ“ƒg–¼‚ª‚È‚©‚Á‚½‚Ì‚ÅAm_supportEventList‚Ö’Ç‰Á‚µ‚Ä‚¨‚­
+						// ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒˆã«ã‚¤ãƒ™ãƒ³ãƒˆåãŒãªã‹ã£ãŸã®ã§ã€m_supportEventListã¸è¿½åŠ ã—ã¦ãŠã
 						m_supportEventList.emplace_back(std::make_unique<CharaEvent>(charaEvent));
 					}
 				}
@@ -170,7 +170,7 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 			std::ifstream ifs((GetExeDirectory() / L"Common.json").wstring());
 			ATLASSERT(ifs);
 			if (!ifs) {
-				throw std::runtime_error("Common.json ‚Ì“Ç‚İ‚İ‚É¸”s");
+				throw std::runtime_error("Common.json ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—");
 			}
 			json jsonCommon;
 			ifs >> jsonCommon;
@@ -189,7 +189,7 @@ bool UmaEventLibrary::LoadUmaMusumeLibrary()
 
 void UmaEventLibrary::ChangeIkuseiUmaMusume(const std::wstring& umaName)
 {
-	std::unique_lock<std::mutex> lock(m_mtxName);	// ˆê‰”O‚Ì‚½‚ßc
+	std::unique_lock<std::mutex> lock(m_mtxName);	// ä¸€å¿œå¿µã®ãŸã‚â€¦
 	if (m_currentIkuseUmaMusume != umaName) {
 		INFO_LOG << L"ChangeIkuseiUmaMusume: " << umaName;
 		m_currentIkuseUmaMusume = umaName;
@@ -199,7 +199,7 @@ void UmaEventLibrary::ChangeIkuseiUmaMusume(const std::wstring& umaName)
 
 void UmaEventLibrary::AnbigiousChangeIkuseImaMusume(std::vector<std::wstring> ambiguousUmaMusumeNames)
 {
-	// whilte space ‚ğæ‚èœ‚­
+	// whilte space ã‚’å–ã‚Šé™¤ã
 	for (auto& name : ambiguousUmaMusumeNames) {
 		boost::algorithm::trim(name);
 		boost::algorithm::replace_all(name, L" ", L"");
@@ -218,7 +218,7 @@ boost::optional<UmaEventLibrary::UmaEvent> UmaEventLibrary::AmbiguousSearchEvent
 {
 	_DBInit();
 
-	// whilte space ‚ğæ‚èœ‚­
+	// whilte space ã‚’å–ã‚Šé™¤ã
 	for (auto& name : ambiguousEventNames) {
 		boost::algorithm::trim(name);
 		boost::algorithm::replace_all(name, L" ", L"");
@@ -240,7 +240,7 @@ void UmaEventLibrary::_DBUmaNameInit()
 	auto dbFolder = GetExeDirectory() / L"simstringDB" / L"UmaName";
 	auto dbPath = dbFolder / L"umaName_unicode.db";
 
-	// DBƒtƒHƒ‹ƒ_“à‚ğÁ‚µ‚Ä‰Šú‰»
+	// DBãƒ•ã‚©ãƒ«ãƒ€å†…ã‚’æ¶ˆã—ã¦åˆæœŸåŒ–
 	if (boost::filesystem::is_directory(dbFolder)) {
 		boost::system::error_code ec = {};
 		boost::filesystem::remove_all(dbFolder, ec);
@@ -254,7 +254,7 @@ void UmaEventLibrary::_DBUmaNameInit()
 	simstring::ngram_generator gen;
 	simstring::writer_base<std::wstring> dbw(gen, dbPath.string());
 
-	// ˆç¬ƒEƒ}–º‚Ì–¼‘O‚ğ’Ç‰Á
+	// è‚²æˆã‚¦ãƒå¨˜ã®åå‰ã‚’è¿½åŠ 
 	for (const auto& charaEvent : m_charaEventList) {
 		const std::wstring& name = charaEvent->name;
 		dbw.insert(name);
@@ -272,7 +272,7 @@ void UmaEventLibrary::_DBInit()
 		auto dbFolder = GetExeDirectory() / L"simstringDB" / L"Event";
 		auto dbPath = dbFolder / L"event_unicode.db";
 
-		// DBƒtƒHƒ‹ƒ_“à‚ğÁ‚µ‚Ä‰Šú‰»
+		// DBãƒ•ã‚©ãƒ«ãƒ€å†…ã‚’æ¶ˆã—ã¦åˆæœŸåŒ–
 		if (boost::filesystem::is_directory(dbFolder)) {
 			boost::system::error_code ec = {};
 			boost::filesystem::remove_all(dbFolder, ec);
@@ -286,7 +286,7 @@ void UmaEventLibrary::_DBInit()
 		simstring::ngram_generator gen(2, false);	// bi-gram
 		simstring::writer_base<std::wstring> dbw(gen, dbPath.string());
 
-		// ˆç¬ƒEƒ}–º‚ÌƒCƒxƒ“ƒg‚ğ’Ç‰Á
+		// è‚²æˆã‚¦ãƒå¨˜ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ 
 		for (const auto& charaEvent : m_charaEventList) {
 			if (charaEvent->name.find(m_currentIkuseUmaMusume) == std::wstring::npos) {
 				continue;
@@ -298,7 +298,7 @@ void UmaEventLibrary::_DBInit()
 			break;
 		}
 
-		// ƒTƒ|[ƒgƒJ[ƒh‚ÌƒCƒxƒ“ƒg‚ğ’Ç‰Á
+		// ã‚µãƒãƒ¼ãƒˆã‚«ãƒ¼ãƒ‰ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ 
 		for (const auto& charaEvent : m_supportEventList) {
 			for (const auto& umaEvent : charaEvent->umaEventList) {
 				dbw.insert(umaEvent.eventName);
@@ -318,7 +318,7 @@ UmaEventLibrary::UmaEvent UmaEventLibrary::_SearchEventOptions(const std::wstrin
 {
 	m_lastEventSource.clear();
 
-	// ˆç¬ƒEƒ}–º‚ÌƒCƒxƒ“ƒg‚ğ’T‚·
+	// è‚²æˆã‚¦ãƒå¨˜ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ¢ã™
 	for (const auto& charaEvent : m_charaEventList) {
 		if (charaEvent->name.find(m_currentIkuseUmaMusume) == std::wstring::npos) {
 			continue;
@@ -333,7 +333,7 @@ UmaEventLibrary::UmaEvent UmaEventLibrary::_SearchEventOptions(const std::wstrin
 		break;
 	}
 
-	// ƒTƒ|[ƒgƒJ[ƒh‚ÌƒCƒxƒ“ƒg‚ğ’T‚·
+	// ã‚µãƒãƒ¼ãƒˆã‚«ãƒ¼ãƒ‰ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ¢ã™
 	for (const auto& charaEvent : m_supportEventList) {
 		for (const auto& umaEvent : charaEvent->umaEventList) {
 			if (umaEvent.eventName == eventName) {

@@ -1,4 +1,4 @@
-
+ï»¿
 // CommonUtility.h
 
 #pragma once
@@ -10,16 +10,16 @@
 
 namespace fs = boost::filesystem;
 
-/// Œ»İÀs’†‚Ì exe‚Ì‚ ‚éƒtƒHƒ‹ƒ_‚ÌƒpƒX‚ğ•Ô‚·
+/// ç¾åœ¨å®Ÿè¡Œä¸­ã® exeã®ã‚ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã®ãƒ‘ã‚¹ã‚’è¿”ã™
 fs::path GetExeDirectory();
 
-/// —áŠO‚ğ”­¶‚³‚¹‚é
+/// ä¾‹å¤–ã‚’ç™ºç”Ÿã•ã›ã‚‹
 #define THROWEXCEPTION(error)	FatalErrorOccur(error, __FILE__,__LINE__)
 
 void	FatalErrorOccur(const std::string& error, const char* fileName, const int line);
 void	FatalErrorOccur(const std::wstring& error, const char* fileName, const int line);
 
-/// ƒvƒƒZƒX‚ğ‹N“®‚µAI—¹‚Ü‚Å‘Ò‚Â
+/// ãƒ—ãƒ­ã‚»ã‚¹ã‚’èµ·å‹•ã—ã€çµ‚äº†ã¾ã§å¾…ã¤
 DWORD	StartProcess(const fs::path& exePath, const std::wstring& commandLine);
 
 DWORD	StartProcessGetStdOut(const fs::path& exePath, const std::wstring& commandLine, std::string& stdoutText);

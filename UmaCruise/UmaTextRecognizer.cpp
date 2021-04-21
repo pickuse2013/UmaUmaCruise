@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "UmaTextRecognizer.h"
 
 #include <boost\algorithm\string\trim.hpp>
@@ -64,9 +64,9 @@ cv::Rect	cvRectFromCRect(const CRect& rcBounds)
 // ===============================================================================
 
 
-// cutImage ‚É‚ ‚éƒeƒLƒXƒg‚ğˆÍ‚¤”ÍˆÍ‚ğ’²‚×‚Ä•Ô‚·
-// cutImage‚Í•”wŒi‚É”’•¶š‚Å‚ ‚é•K—v‚ª‚ ‚é
-// ¡‚Ì‚Æ‚±‚ëƒCƒxƒ“ƒg–¼‚Ì‚¾‚¯g‚Á‚Ä‚é
+// cutImage ã«ã‚ã‚‹ãƒ†ã‚­ã‚¹ãƒˆã‚’å›²ã†ç¯„å›²ã‚’èª¿ã¹ã¦è¿”ã™
+// cutImageã¯é»’èƒŒæ™¯ã«ç™½æ–‡å­—ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹
+// ä»Šã®ã¨ã“ã‚ã‚¤ãƒ™ãƒ³ãƒˆåã®æ™‚ã ã‘ä½¿ã£ã¦ã‚‹
 CRect GetTextBounds(cv::Mat cutImage, const CRect& rcBounds)
 {
 	//cv::Mat resizedImage;
@@ -88,10 +88,10 @@ CRect GetTextBounds(cv::Mat cutImage, const CRect& rcBounds)
 		for (int x = 0; x < thresImage.cols; x++) {
 			uchar val = thresImage.at<uchar>(y, x);
 			if (val >= 255) {
-				// ”’‚ªŒ©‚Â‚©‚Á‚½“_‚Åˆê”Ô¬‚³‚¢’n“_‚ğ’T‚·
+				// ç™½ãŒè¦‹ã¤ã‹ã£ãŸæ™‚ç‚¹ã§ä¸€ç•ªå°ã•ã„åœ°ç‚¹ã‚’æ¢ã™
 				ptLT.y = std::min(ptLT.y, (LONG)y);
 				ptLT.x = std::min(ptLT.x, (LONG)x);
-				// ”’‚ªŒ©‚Â‚©‚Á‚½“_‚Åˆê”Ô‘å‚«‚¢’n“_‚ğ’T‚·
+				// ç™½ãŒè¦‹ã¤ã‹ã£ãŸæ™‚ç‚¹ã§ä¸€ç•ªå¤§ãã„åœ°ç‚¹ã‚’æ¢ã™
 				ptRB.y = std::max(ptRB.y, (LONG)y);
 				ptRB.x = std::max(ptRB.x, (LONG)x);
 			}
@@ -107,7 +107,7 @@ CRect GetTextBounds(cv::Mat cutImage, const CRect& rcBounds)
 	//rcAdjustTextBounds.bottom /= scale;
 	rcAdjustTextBounds.MoveToXY(rcBounds.left + rcAdjustTextBounds.left, rcBounds.top + rcAdjustTextBounds.top);
 
-	rcAdjustTextBounds.InflateRect(kTextMargin, kTextMargin, kTextMargin, kTextMargin);	// –c‚ç‚Ü‚¹‚é
+	rcAdjustTextBounds.InflateRect(kTextMargin, kTextMargin, kTextMargin, kTextMargin);	// è†¨ã‚‰ã¾ã›ã‚‹
 	ATLASSERT(rcAdjustTextBounds.Width() > 0 && rcAdjustTextBounds.Height() > 0);
 	rcAdjustTextBounds.NormalizeRect();
 	return rcAdjustTextBounds;
@@ -223,7 +223,7 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 		return false;
 	}
 
-	{	// ˆç¬ƒEƒ}–º–¼
+	{	// è‚²æˆã‚¦ãƒå¨˜å
 		CRect rcSubName = _AdjustBounds(srcImage, m_testBounds[kUmaMusumeSubNameBounds]);
 		CRect rcName = _AdjustBounds(srcImage, m_testBounds[kUmaMusumeNameBounds]);
 
@@ -256,17 +256,17 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 			m_umaMusumeName.emplace_back(umamusumeName);
 		}
 	}
-	{	// ƒCƒxƒ“ƒg–¼
+	{	// ã‚¤ãƒ™ãƒ³ãƒˆå
 		CRect rcEventName = _AdjustBounds(srcImage, m_testBounds[kEventNameBounds]);
-		if (_IsEventNameIcon(srcImage)) {	// ƒAƒCƒRƒ“‚ª‘¶İ‚µ‚½ê‡A”F¯”ÍˆÍ‚ğ‰E‚É‚¸‚ç‚·
+		if (_IsEventNameIcon(srcImage)) {	// ã‚¢ã‚¤ã‚³ãƒ³ãŒå­˜åœ¨ã—ãŸå ´åˆã€èªè­˜ç¯„å›²ã‚’å³ã«ãšã‚‰ã™
 			enum { kIconTextMargin = 5 };
 			rcEventName.left = _AdjustBounds(srcImage, m_testBounds[kEventNameIconBounds]).right + kIconTextMargin;
 		}
-		// ƒeƒLƒXƒg‚ğˆÍ‚¤”ÍˆÍ‚ğŒ©‚Â‚¯‚é
+		// ãƒ†ã‚­ã‚¹ãƒˆã‚’å›²ã†ç¯„å›²ã‚’è¦‹ã¤ã‘ã‚‹
 		cv::Mat cutImage(srcImage, cvRectFromCRect(rcEventName));
 		CRect rcAdjustTextBounds = GetTextBounds(cutImage, rcEventName);
 
-		// ƒeƒLƒXƒg‚ğ³Šm‚ÉˆÍ‚Á‚½ƒCƒ[ƒW‚ğØ‚èo‚·
+		// ãƒ†ã‚­ã‚¹ãƒˆã‚’æ­£ç¢ºã«å›²ã£ãŸã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’åˆ‡ã‚Šå‡ºã™
 		cv::Mat cutImage2(srcImage, cvRectFromCRect(rcAdjustTextBounds));
 		//cv::imshow("cutImage2", cutImage2);
 		// 
@@ -283,7 +283,7 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 		cv::Mat thresImage;
 		cv::threshold(grayImage, thresImage, 0.0, 255.0, cv::THRESH_OTSU);
 #if 0
-		// 4”{
+		// 4å€
 		cv::Mat resizedImage;
 		constexpr double scale = 4.0;
 		cv::resize(cutImage2, resizedImage, cv::Size(), scale, scale, cv::INTER_CUBIC);
@@ -297,14 +297,14 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 		auto funcPushBackImageText = [this](cv::Mat& image) {
 			std::wstring text = TextFromImage(image);
 
-			// typo ‚ğ³Œë•\‚Å•ÏŠ·
+			// typo ã‚’æ­£èª¤è¡¨ã§å¤‰æ›
 			auto itFound = m_typoDictionary.find(text);
 			if (itFound != m_typoDictionary.end()) {
 				text = itFound->second;
 			}
-			// 'I' ‚ª '7' ‚ÉŒë”F¯‚³‚ê‚Ä‚µ‚Ü‚¤‚Á‚Û‚¢‚Ì‚Å’uŠ·‚µ‚ÄŒó•â‚É’Ç‰Á‚µ‚Ä‚¨‚­
+			// 'ï¼' ãŒ '7' ã«èª¤èªè­˜ã•ã‚Œã¦ã—ã¾ã†ã£ã½ã„ã®ã§ç½®æ›ã—ã¦å€™è£œã«è¿½åŠ ã—ã¦ãŠã
 			if (text.find(L"7") != std::wstring::npos) {
-				std::wstring replacedText = boost::algorithm::replace_all_copy(text, L"7", L"I");
+				std::wstring replacedText = boost::algorithm::replace_all_copy(text, L"7", L"ï¼");
 				m_eventName.emplace_back(replacedText);
 			}
 			m_eventName.emplace_back(text);
@@ -317,7 +317,7 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 		//funcPushBackImageText(resizedImage);
 		//funcPushBackImageText(thresImage2);
 	}
-	{	// Œ»İ‚Ì“ú•t
+	{	// ç¾åœ¨ã®æ—¥ä»˜
 		CRect rcTurnBounds = _AdjustBounds(srcImage, m_testBounds[kCurrentTurnBounds]);
 		cv::Mat cutImage(srcImage, cvRectFromCRect(rcTurnBounds));
 
@@ -335,7 +335,7 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 		cv::threshold(grayImage, manualThresholdImage, m_kCurrentTurnThreshold, 255.0, cv::THRESH_BINARY);
 
 		std::wstring manualThresImageText = TextFromImage(manualThresholdImage);
-		m_currentTurn.emplace_back(manualThresImageText);	// —Dæ
+		m_currentTurn.emplace_back(manualThresImageText);	// å„ªå…ˆ
 
 		std::wstring cutImageText = TextFromImage(cutImage);
 		m_currentTurn.emplace_back(cutImageText);
@@ -345,19 +345,19 @@ bool UmaTextRecognizer::TextRecognizer(Gdiplus::Bitmap* image)
 
 		//INFO_LOG << L"CurrentTurn, cut: " << cutImageText << L" thres: " << thresImageText;
 	}
-	{	// Œ»İƒƒjƒ…[[ƒgƒŒ[ƒjƒ“ƒO]
+	{	// ç¾åœ¨ãƒ¡ãƒ‹ãƒ¥ãƒ¼[ãƒˆãƒ¬ãƒ¼ãƒ‹ãƒ³ã‚°]
 		m_bTrainingMenu = false;
 
 		CRect rcCurrentMenuBounds = _AdjustBounds(srcImage, m_testBounds[kCurrentMenuBounds]);
 		cv::Mat cutImage(srcImage, cvRectFromCRect(rcCurrentMenuBounds));
 
 		std::wstring cutImageText = TextFromImage(cutImage);
-		if (cutImageText == L"ƒgƒŒ[ƒjƒ“ƒO") {
+		if (cutImageText == L"ãƒˆãƒ¬ãƒ¼ãƒ‹ãƒ³ã‚°") {
 			CRect rcBackButtonBounds = _AdjustBounds(srcImage, m_testBounds[kBackButtonBounds]);
 			cv::Mat cutImage2(srcImage, cvRectFromCRect(rcBackButtonBounds));
 
 			std::wstring cutImage2Text = TextFromImage(cutImage2);
-			if (cutImage2Text == L"–ß‚é") {
+			if (cutImage2Text == L"æˆ»ã‚‹") {
 				m_bTrainingMenu = true;
 			}
 		}
@@ -397,7 +397,7 @@ bool UmaTextRecognizer::_IsEventNameIcon(cv::Mat srcImage)
 	int c = grayImage.channels();
 	ATLASSERT(c == 1);
 
-	// ‰æ‘f’†‚Ì”’‚Ì”‚ğ”‚¦‚é
+	// ç”»ç´ ä¸­ã®ç™½ã®æ•°ã‚’æ•°ãˆã‚‹
 	int whilteCount = 0;
 	for (int y = 0; y < thresImage.rows; y++) {
 		for (int x = 0; x < thresImage.cols; x++) {
@@ -409,6 +409,6 @@ bool UmaTextRecognizer::_IsEventNameIcon(cv::Mat srcImage)
 	}
 	const int imagePixelCount = thresImage.rows * thresImage.cols;
 	const double whiteRatio = static_cast<double>(whilteCount) / imagePixelCount;
-	bool isIcon = whiteRatio > kEventNameIconThreshold;	// ”’‚Ì”ä—¦‚ªˆê’èˆÈã‚È‚çƒAƒCƒRƒ“‚Æ‚İ‚È‚·
+	bool isIcon = whiteRatio > kEventNameIconThreshold;	// ç™½ã®æ¯”ç‡ãŒä¸€å®šä»¥ä¸Šãªã‚‰ã‚¢ã‚¤ã‚³ãƒ³ã¨ã¿ãªã™
 	return isIcon;
 }

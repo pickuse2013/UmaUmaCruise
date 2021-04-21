@@ -1,4 +1,4 @@
-
+ï»¿
 #include "stdafx.h"
 #include "MainDlg.h"
 
@@ -107,12 +107,12 @@ DWORD CMainDlg::OnPrePaint(int idCtrl, LPNMCUSTOMDRAW)
 
 DWORD CMainDlg::OnItemPrePaint(int, LPNMCUSTOMDRAW lpNMCustomDraw)
 {
-	// ‘O”¼‚ÆŒã”¼‚ÅƒJƒ‰ƒ€‚ÌF‚ğF•ª‚¯‚·‚é
+	// å‰åŠã¨å¾ŒåŠã§ã‚«ãƒ©ãƒ ã®è‰²ã‚’è‰²åˆ†ã‘ã™ã‚‹
 	auto pCustomDraw = (LPNMLVCUSTOMDRAW)lpNMCustomDraw;
 #if 0
 	CString date;
 	m_raceListView.GetItemText(static_cast<int>(pCustomDraw->nmcd.dwItemSpec), 0, date);
-	const bool first = date.Right(2) == L"‘O”¼";
+	const bool first = date.Right(2) == L"å‰åŠ";
 #endif
 	const bool first = pCustomDraw->nmcd.lItemlParam != 0;
 	
@@ -139,20 +139,20 @@ LRESULT CMainDlg::OnInitDialog(UINT, WPARAM, LPARAM, BOOL&)
 
 	UIAddChildWindowContainer(m_hWnd);
 
-	// ƒtƒHƒ‹ƒ_ƒpƒX‚Ì•¶šƒR[ƒhƒ`ƒFƒbƒN
+	// ãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯
 	auto exeDir = GetExeDirectory().wstring();
 	auto sjisDir = ShiftJISfromUTF16(exeDir);
 	auto sjis_utf16exeDir = UTF16fromShiftJIS(sjisDir);
 	if (exeDir != sjis_utf16exeDir) {
 		//ERROR_LOG << L"exeDir contain unicode";
-		MessageBox(L"ƒtƒHƒ‹ƒ_–¼‚Éunicode‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚Ì‚Å³í“®ì‚µ‚Ü‚¹‚ñB\n‚à‚Á‚Æó‚¢ŠK‘w(C:\\)‚È‚Ç‚ÉƒtƒHƒ‹ƒ_‚ğˆÚ“®‚³‚¹‚Ä‚­‚¾‚³‚¢B", L"ƒGƒ‰[", MB_ICONERROR);
+		MessageBox(L"ãƒ•ã‚©ãƒ«ãƒ€åã«unicodeãŒå«ã¾ã‚Œã¦ã„ã‚‹ã®ã§æ­£å¸¸å‹•ä½œã—ã¾ã›ã‚“ã€‚\nã‚‚ã£ã¨æµ…ã„éšå±¤(C:\\)ãªã©ã«ãƒ•ã‚©ãƒ«ãƒ€ã‚’ç§»å‹•ã•ã›ã¦ãã ã•ã„ã€‚", L"ã‚¨ãƒ©ãƒ¼", MB_ICONERROR);
 	}
 
 	m_config.LoadConfig();
 
 	DoDataExchange(DDX_LOAD);
 
-	// ‘I‘ğˆƒGƒfƒBƒbƒg‚Ì”wŒiF‚ğİ’è
+	// é¸æŠè‚¢ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã®èƒŒæ™¯è‰²ã‚’è¨­å®š
 	m_optionBkColor[0] = RGB(203, 247, 148);
 	m_optionBkColor[1] = RGB(255, 236, 150);
 	m_optionBkColor[2] = RGB(255, 203, 228);
@@ -169,7 +169,7 @@ LRESULT CMainDlg::OnInitDialog(UINT, WPARAM, LPARAM, BOOL&)
 		ERROR_LOG << L"LoadUmaMusumeLibrary failed";
 		ATLASSERT(FALSE);
 	} else {
-		// ˆç¬ƒEƒ}–º‚ÌƒŠƒXƒg‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚É’Ç‰Á
+		// è‚²æˆã‚¦ãƒå¨˜ã®ãƒªã‚¹ãƒˆã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«è¿½åŠ 
 		CString currentProperty;
 		for (const auto& uma : m_umaEventLibrary.GetIkuseiUmaMusumeEventList()) {
 			if (currentProperty != uma->property.c_str()) {
@@ -202,20 +202,20 @@ LRESULT CMainDlg::OnInitDialog(UINT, WPARAM, LPARAM, BOOL&)
 		lvc.iSubItem = nItem;
 		m_raceListView.InsertColumn(nItem, &lvc);
 	};
-	funcAddColumn(L"ŠJÃ“ú", 0, 120);
-	funcAddColumn(L"ƒŒ[ƒX–¼", 1, 144);
-	funcAddColumn(L"‹——£", 2, 110);
-	funcAddColumn(L"ƒR[ƒX", 3, 42);
-	funcAddColumn(L"•ûŒü", 4, 38);
-	funcAddColumn(L"ƒŒ[ƒXê", 5, 58);
+	funcAddColumn(L"é–‹å‚¬æ—¥", 0, 120);
+	funcAddColumn(L"ãƒ¬ãƒ¼ã‚¹å", 1, 144);
+	funcAddColumn(L"è·é›¢", 2, 110);
+	funcAddColumn(L"ã‚³ãƒ¼ã‚¹", 3, 42);
+	funcAddColumn(L"æ–¹å‘", 4, 38);
+	funcAddColumn(L"ãƒ¬ãƒ¼ã‚¹å ´", 5, 58);
 
 	try {
 		{
 			std::ifstream ifs((GetExeDirectory() / "Common.json").wstring());
 			ATLASSERT(ifs);
 			if (!ifs) {
-				ERROR_LOG << L"Common.json ‚ª‘¶İ‚µ‚Ü‚¹‚ñ...";
-				ChangeWindowTitle(L"Common.json ‚ª‘¶İ‚µ‚Ü‚¹‚ñ...");
+				ERROR_LOG << L"Common.json ãŒå­˜åœ¨ã—ã¾ã›ã‚“...";
+				ChangeWindowTitle(L"Common.json ãŒå­˜åœ¨ã—ã¾ã›ã‚“...");
 			} else {
 				json jsonCommon;
 				ifs >> jsonCommon;
@@ -302,7 +302,7 @@ LRESULT CMainDlg::OnAppAbout(WORD, WORD, HWND, BOOL&)
 	return 0;
 }
 
-// ƒŒ[ƒXƒŠƒXƒg‚Ì•\¦‚ğØ‚è‘Ö‚¦
+// ãƒ¬ãƒ¼ã‚¹ãƒªã‚¹ãƒˆã®è¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆ
 void CMainDlg::OnShowHideRaceList(UINT uNotifyCode, int nID, CWindow wndCtl)
 {
 	CRect rcWindow;
@@ -385,16 +385,16 @@ void CMainDlg::OnSelChangeUmaMusume(UINT uNotifyCode, int nID, CWindow wndCtl)
 	}
 	CString umaName;
 	m_cmbUmaMusume.GetLBText(index, umaName);
-	if (umaName.Left(1) == L"™") {
+	if (umaName.Left(1) == L"â˜†") {
 		return;
 	}
 	m_umaEventLibrary.ChangeIkuseiUmaMusume((LPCWSTR)umaName);
 }
 
-// ƒ_ƒCƒAƒƒO‚Ì”wŒiF‚ğ”’‚É•ÏX
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®èƒŒæ™¯è‰²ã‚’ç™½ã«å¤‰æ›´
 HBRUSH CMainDlg::OnCtlColorDlg(CDCHandle dc, CWindow wnd)
 {
-	// ‘I‘ğˆƒGƒfƒBƒbƒg‚Ì”wŒiF‚ğİ’è
+	// é¸æŠè‚¢ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã®èƒŒæ™¯è‰²ã‚’è¨­å®š
 	const int ctrlID = wnd.GetDlgCtrlID();
 	if (IDC_EDIT_OPTION1 <= ctrlID && ctrlID <= IDC_EDIT_OPTION3) {
 		int i = ctrlID - IDC_EDIT_OPTION1;
@@ -410,7 +410,7 @@ void CMainDlg::OnScreenShot(UINT uNotifyCode, int nID, CWindow wndCtl)
 {
 	HWND hwndTarget = ::FindWindow(m_targetClassName, m_targetWindowName);
 	if (!hwndTarget) {
-		ChangeWindowTitle(L"ƒEƒ}–º‚ÌƒEƒBƒ“ƒhƒE‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBBB");
+		ChangeWindowTitle(L"ã‚¦ãƒå¨˜ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã€‚ã€‚");
 		return ;
 	}
 	auto ssFolderPath = GetExeDirectory() / L"screenshot";
@@ -437,7 +437,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 	bool bChecked = btnStart.GetCheck() == BST_CHECKED;
 	if (bChecked) {
 		ATLASSERT(!m_threadAutoDetect.joinable());
-		btnStart.SetWindowText(L"ƒXƒgƒbƒv");
+		btnStart.SetWindowText(L"ã‚¹ãƒˆãƒƒãƒ—");
 		m_cancelAutoDetect = false;
 		m_threadAutoDetect = std::thread([this]()
 		{
@@ -454,12 +454,12 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 						m_previewWindow.UpdateImage(ssImage.release());
 					}
 
-					// ˆç¬ƒEƒ}–º–¼
+					// è‚²æˆã‚¦ãƒå¨˜å
 					std::wstring prevUmaName = m_umaEventLibrary.GetCurrentIkuseiUmaMusume();
 					m_umaEventLibrary.AnbigiousChangeIkuseImaMusume(m_umaTextRecoginzer.GetUmaMusumeName());
 					std::wstring nowUmaName = m_umaEventLibrary.GetCurrentIkuseiUmaMusume();
 					if (prevUmaName != nowUmaName) {
-						// ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ğ•ÏX
+						// ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã‚’å¤‰æ›´
 						const int count = m_cmbUmaMusume.GetCount();
 						for (int i = 0; i < count; ++i) {
 							CString name;
@@ -471,7 +471,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 						}
 					}
 
-					// ƒCƒxƒ“ƒgŒŸõ
+					// ã‚¤ãƒ™ãƒ³ãƒˆæ¤œç´¢
 					auto optUmaEvent = m_umaEventLibrary.AmbiguousSearchEvent(m_umaTextRecoginzer.GetEventName());
 					if (optUmaEvent) {
 						m_eventName = optUmaEvent->eventName.c_str();
@@ -481,7 +481,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 					}
 
 
-					// Œ»İƒ^[ƒ“
+					// ç¾åœ¨ã‚¿ãƒ¼ãƒ³
 					std::wstring currentTurn = m_raceDateLibrary.AnbigiousChangeCurrentTurn(m_umaTextRecoginzer.GetCurrentTurn());
 					if (currentTurn.length() && m_currentTurn != currentTurn.c_str()) {
 						_UpdateRaceList(currentTurn);
@@ -497,7 +497,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 					}
 				} else {
 					if (!ssImage) {
-						ChangeWindowTitle(L"ƒEƒ}–º‚ÌƒEƒBƒ“ƒhƒE‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ...");
+						ChangeWindowTitle(L"ã‚¦ãƒå¨˜ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“...");
 					} else {
 						ChangeWindowTitle(L"failed...");
 					}
@@ -512,7 +512,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 			// finish
 			if (m_threadAutoDetect.joinable()) {
 				CButton btnStart = GetDlgItem(IDC_CHECK_START);
-				btnStart.SetWindowText(L"ƒXƒ^[ƒg");
+				btnStart.SetWindowText(L"ã‚¹ã‚¿ãƒ¼ãƒˆ");
 				btnStart.EnableWindow(TRUE);
 				m_threadAutoDetect.detach();
 			}
@@ -521,7 +521,7 @@ void CMainDlg::OnStart(UINT uNotifyCode, int nID, CWindow wndCtl)
 		//SetTimer(kAutoOCRTimerID, kAutoOCRTimerInterval);
 	} else {
 		if (m_threadAutoDetect.joinable()) {
-			btnStart.SetWindowText(L"’â~’†...");
+			btnStart.SetWindowText(L"åœæ­¢ä¸­...");
 			btnStart.EnableWindow(FALSE);
 			m_cancelAutoDetect = true;
 		}
@@ -548,18 +548,18 @@ void CMainDlg::OnEventNameChanged(UINT uNotifyCode, int nID, CWindow wndCtl)
 	
 }
 
-// ƒCƒxƒ“ƒg‘I‘ğˆ‚ÌŒø‰Ê‚ğC³‚·‚é
+// ã‚¤ãƒ™ãƒ³ãƒˆé¸æŠè‚¢ã®åŠ¹æœã‚’ä¿®æ­£ã™ã‚‹
 void CMainDlg::OnEventRevision(UINT uNotifyCode, int nID, CWindow wndCtl)
 {
 	UmaEventLibrary::UmaEvent umaEvent;
 	DoDataExchange(DDX_SAVE, IDC_EDIT_EVENTNAME);
 	DoDataExchange(DDX_SAVE, IDC_EDIT_EVENT_SOURCE);
 	if (m_eventName.IsEmpty()) {
-		MessageBox(L"ƒCƒxƒ“ƒg–¼ ‚ª‹ó‚Å‚·B");
+		MessageBox(L"ã‚¤ãƒ™ãƒ³ãƒˆå ãŒç©ºã§ã™ã€‚");
 		return;
 	}
 	if (m_eventSource.IsEmpty()) {
-		MessageBox(L"ƒ\[ƒX ‚ª‹ó‚Å‚·");
+		MessageBox(L"ã‚½ãƒ¼ã‚¹ ãŒç©ºã§ã™");
 		return;
 	}
 	
@@ -584,20 +584,20 @@ void CMainDlg::OnEventRevision(UINT uNotifyCode, int nID, CWindow wndCtl)
 		jsonOptionsArray.push_back(jsonOption);
 	}
 	if (jsonOptionsArray.empty()) {
-		MessageBox(L"‘I‘ğˆ ‚ª‹ó‚Å‚·");
+		MessageBox(L"é¸æŠè‚¢ ãŒç©ºã§ã™");
 		return;
 	}
 
 	CString msg;
-	msg.Format(L"ƒCƒxƒ“ƒg–¼ [%s] ‚Ì‘I‘ğˆ‚ğC³‚µ‚Ü‚·B\n‚æ‚ë‚µ‚¢‚Å‚·‚©H", (LPCWSTR)m_eventName);
-	if (MessageBox(msg, L"Šm”F", MB_YESNO) == IDNO) {
+	msg.Format(L"ã‚¤ãƒ™ãƒ³ãƒˆå [%s] ã®é¸æŠè‚¢ã‚’ä¿®æ­£ã—ã¾ã™ã€‚\nã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ", (LPCWSTR)m_eventName);
+	if (MessageBox(msg, L"ç¢ºèª", MB_YESNO) == IDNO) {
 		return;
 	}
 	{
 		std::ifstream ifs((GetExeDirectory() / "UmaMusumeLibraryRevision.json").wstring());
 		ATLASSERT(ifs);
 		if (!ifs) {
-			MessageBox(L"UmaMusumeLibraryRevision.json ‚Ì“Ç‚İ‚İ‚É¸”s");
+			MessageBox(L"UmaMusumeLibraryRevision.json ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—");
 			return;
 		}
 		json jsonRevisionLibrary;
@@ -610,38 +610,38 @@ void CMainDlg::OnEventRevision(UINT uNotifyCode, int nID, CWindow wndCtl)
 		bool update = false;
 		json& jsonEventList = jsonRevisionLibrary[source]["Event"];
 		if (jsonEventList.is_array()) {
-			// XV
+			// æ›´æ–°
 			for (json& jsonEvent : jsonEventList) {
 				auto eventElm = *jsonEvent.items().begin();
 				std::string orgEventName = eventElm.key();
 				if (orgEventName == eventName) {
 					json& jsonOptions = eventElm.value();
-					jsonOptions.clear();		// ‘I‘ğˆ‚ğˆê’U‘S•”Á‚·
+					jsonOptions.clear();		// é¸æŠè‚¢ã‚’ä¸€æ—¦å…¨éƒ¨æ¶ˆã™
 					jsonOptions = jsonOptionsArray;
 					update = true;
 					break;
 				}
 			}
 		}
-		// ’Ç‰Á
+		// è¿½åŠ 
 		if (!update) {
 			json jsonEvent;
 			jsonEvent[eventName] = jsonOptionsArray;
 			jsonEventList.push_back(jsonEvent);
 		}
 
-		// •Û‘¶
+		// ä¿å­˜
 		std::ofstream ofs((GetExeDirectory() / "UmaMusumeLibraryRevision.json").wstring());
 		ATLASSERT(ofs);
 		if (!ofs) {
-			MessageBox(L"UmaMusumeLibraryRevision.json ‚ÌƒI[ƒvƒ“‚É¸”s");
+			MessageBox(L"UmaMusumeLibraryRevision.json ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—");
 			return;
 		}
 		ofs << jsonRevisionLibrary.dump(2);
 		ofs.close();
 
 		m_umaEventLibrary.LoadUmaMusumeLibrary();
-		MessageBox(L"C³Š®—¹", L"¬Œ÷");
+		MessageBox(L"ä¿®æ­£å®Œäº†", L"æˆåŠŸ");
 	}
 }
 
@@ -746,7 +746,7 @@ void CMainDlg::_UpdateRaceList(const std::wstring& turn)
 		if (turnOrderedRaceList[i].empty()) {
 			continue;
 		}
-		std::wstring date = allTurnList[i];	// ŠJÃ“ú
+		std::wstring date = allTurnList[i];	// é–‹å‚¬æ—¥
 		bool insert = false;
 		for (const auto& race : turnOrderedRaceList[i]) {
 			if (race->IsMatchState(state)) {

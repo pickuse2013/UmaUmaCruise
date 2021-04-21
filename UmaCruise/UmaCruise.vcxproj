@@ -71,8 +71,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)opencv\include;$(SolutionDir)tesseract\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)opencv\x64\lib;$(SolutionDir)tesseract\debug\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)opencv\include;$(SolutionDir)tesseract\include;C:\Users\pickuse\Documents\GitHub\vcpkg\installed\x64-windows\include;C:\Users\pickuse\Documents\Lib\WTL10_10320\Include;C:\Users\pickuse\Documents\GitHub\vcpkg\packages\opencv4_x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)opencv\x64\lib;$(SolutionDir)tesseract\debug\lib;C:\Users\pickuse\Documents\GitHub\vcpkg\packages\opencv4_x64-windows\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,6 +82,9 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)opencv\include;$(SolutionDir)tesseract\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)opencv\x64\lib;$(SolutionDir)tesseract\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>false</VcpkgEnableManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,7 +130,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world451d.lib;tesseract41d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world.lib;tesseract41d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>

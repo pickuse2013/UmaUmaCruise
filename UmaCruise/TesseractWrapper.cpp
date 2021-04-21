@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "TesseractWrapper.h"
 
 #include <unordered_map>
@@ -54,7 +54,7 @@ namespace TesseractWrapper {
 		ptess->Recognize(0);
 		std::wstring text = UTF16fromUTF8(ptess->GetUTF8Text()).c_str();
 
-		// whilte space ‚ğæ‚èœ‚­
+		// whilte space ã‚’å–ã‚Šé™¤ã
 		boost::algorithm::trim(text);
 		boost::algorithm::replace_all(text, L" ", L"");
 		boost::algorithm::replace_all(text, L"\n", L"");

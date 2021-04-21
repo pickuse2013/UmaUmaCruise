@@ -1,4 +1,4 @@
-
+ï»¿
 #include "stdafx.h"
 #include "CommonUtility.h"
 #include <fstream>
@@ -8,7 +8,7 @@
 #include "Logger.h"
 #include "CodeConvert.h"
 
-/// Œ»İÀs’†‚Ì exe‚Ì‚ ‚éƒtƒHƒ‹ƒ_‚ÌƒpƒX‚ğ•Ô‚·
+/// ç¾åœ¨å®Ÿè¡Œä¸­ã® exeã®ã‚ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã®ãƒ‘ã‚¹ã‚’è¿”ã™
 fs::path GetExeDirectory()
 {
 	WCHAR exePath[MAX_PATH] = L"";
@@ -30,7 +30,7 @@ void	FatalErrorOccur(const std::wstring& error, const char* fileName, const int 
 	throw std::exception(CodeConvert::ShiftJISfromUTF16(error).c_str());
 }
 
-/// ƒvƒƒZƒX‚ğ‹N“®‚µAI—¹‚Ü‚Å‘Ò‚Â
+/// ãƒ—ãƒ­ã‚»ã‚¹ã‚’èµ·å‹•ã—ã€çµ‚äº†ã¾ã§å¾…ã¤
 DWORD	StartProcess(const fs::path& exePath, const std::wstring& commandLine)
 {
 	//INFO_LOG << L"StartProcess\n" << L"\"" << exePath << L"\" " << commandLine;

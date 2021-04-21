@@ -1,4 +1,4 @@
-// UmaCruise.cpp : main source file for UmaCruise.exe
+﻿// UmaCruise.cpp : main source file for UmaCruise.exe
 //
 
 #include "stdafx.h"

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <array>
 #include <memory>
@@ -33,7 +33,7 @@ public:
 	}
 
 private:
-	// BaseClientSize ‚ğŠî€‚Æ‚µ‚ÄAimage‚ÌƒTƒCƒY‚É‡‚¤‚æ‚¤‚É bounds‚ğ’²ß‚·‚é
+	// BaseClientSize ã‚’åŸºæº–ã¨ã—ã¦ã€imageã®ã‚µã‚¤ã‚ºã«åˆã†ã‚ˆã†ã« boundsã‚’èª¿ç¯€ã™ã‚‹
 	CRect	_AdjustBounds(const cv::Mat& srcImage, CRect bounds);
 
 	bool	_IsEventNameIcon(cv::Mat srcImage);

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <array>
@@ -14,48 +14,48 @@ class UmaEventLibrary
 {
 public:
 	struct EventOptionEffect {
-		std::wstring	option;	// ‘I‘ğˆ
-		std::wstring	effect;	// Œø‰Ê
+		std::wstring	option;	// é¸æŠè‚¢
+		std::wstring	effect;	// åŠ¹æœ
 	};
-	enum { kMaxOption = 3 };	// 1‚Â‚ÌƒCƒxƒ“ƒg‚É•t‚«AÅ‘å3‚Â‚Ì‘I‘ğˆ‚ª‚ ‚é
+	enum { kMaxOption = 3 };	// 1ã¤ã®ã‚¤ãƒ™ãƒ³ãƒˆã«ä»˜ãã€æœ€å¤§3ã¤ã®é¸æŠè‚¢ãŒã‚ã‚‹
 	typedef std::array<EventOptionEffect, kMaxOption>	EventOptions;
 
 	struct UmaEvent {
-		std::wstring	eventName;		// ƒCƒxƒ“ƒg–¼
+		std::wstring	eventName;		// ã‚¤ãƒ™ãƒ³ãƒˆå
 		EventOptions	eventOptions;
 	};
 
-	// ˆêl‚ÌƒLƒƒƒ‰‚ªŠ—L‚·‚é‘SƒCƒxƒ“ƒg‚ğŠ‚·‚é
+	// ä¸€äººã®ã‚­ãƒ£ãƒ©ãŒæ‰€æœ‰ã™ã‚‹å…¨ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ‰€æŒã™ã‚‹
 	struct CharaEvent {
-		std::wstring	name;	// ƒLƒƒƒ‰–¼ / ƒTƒ|[ƒg–¼
-		std::wstring	property;	// [™1, ™2, ™3] / [SSR, SR, R]
-		std::vector<UmaEvent>	umaEventList;	// ƒLƒƒƒ‰‚ªŠ—L‚·‚é‘SƒCƒxƒ“ƒgƒŠƒXƒg
+		std::wstring	name;	// ã‚­ãƒ£ãƒ©å / ã‚µãƒãƒ¼ãƒˆå
+		std::wstring	property;	// [â˜†1, â˜†2, â˜†3] / [SSR, SR, R]
+		std::vector<UmaEvent>	umaEventList;	// ã‚­ãƒ£ãƒ©ãŒæ‰€æœ‰ã™ã‚‹å…¨ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒˆ
 	};
 	typedef std::vector<std::unique_ptr<CharaEvent>>	CharaEventList;
 
-	// UmaMusumeLibrary.json ‚ğ“Ç‚İ‚Ş
+	// UmaMusumeLibrary.json ã‚’èª­ã¿è¾¼ã‚€
 	bool	LoadUmaMusumeLibrary();
 
-	// Œ»İ‘I‘ğ’†‚Ìˆç¬ƒEƒ}–º–¼‚ğ•Ô‚·
+	// ç¾åœ¨é¸æŠä¸­ã®è‚²æˆã‚¦ãƒå¨˜åã‚’è¿”ã™
 	const std::wstring& GetCurrentIkuseiUmaMusume() const {
 		return m_currentIkuseUmaMusume;
 	}
 
-	// ˆç¬ƒEƒ}–º‚ÌƒCƒxƒ“ƒgƒŠƒXƒg‚ğ•Ô‚·
+	// è‚²æˆã‚¦ãƒå¨˜ã®ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒˆã‚’è¿”ã™
 	const CharaEventList& GetIkuseiUmaMusumeEventList() const {
 		return m_charaEventList;
 	}
 
-	// ŒŸõ‘ÎÛ‚Æ‚·‚éˆç¬ƒEƒ}–º‚ğ•ÏX‚·‚é
+	// æ¤œç´¢å¯¾è±¡ã¨ã™ã‚‹è‚²æˆã‚¦ãƒå¨˜ã‚’å¤‰æ›´ã™ã‚‹
 	void	ChangeIkuseiUmaMusume(const std::wstring& umaName);
 
-	// ‚ ‚¢‚Ü‚¢ŒŸõ‚Åˆç¬ƒEƒ}–º‚ğ•ÏX‚·‚é
+	// ã‚ã„ã¾ã„æ¤œç´¢ã§è‚²æˆã‚¦ãƒå¨˜ã‚’å¤‰æ›´ã™ã‚‹
 	void	AnbigiousChangeIkuseImaMusume(std::vector<std::wstring> ambiguousUmaMusumeNames);
 
-	// ‚ ‚¢‚Ü‚¢ŒŸõ‚ÅƒCƒxƒ“ƒg–¼‚ğ’T‚·
+	// ã‚ã„ã¾ã„æ¤œç´¢ã§ã‚¤ãƒ™ãƒ³ãƒˆåã‚’æ¢ã™
 	boost::optional<UmaEvent>	AmbiguousSearchEvent(std::vector<std::wstring> ambiguousEventNames);
 
-	// ƒCƒxƒ“ƒg‚ª‚Ç‚ÌƒLƒƒƒ‰‚©‚ç”­¶‚µ‚½‚Ì‚©‚ğ•Ô‚·
+	// ã‚¤ãƒ™ãƒ³ãƒˆãŒã©ã®ã‚­ãƒ£ãƒ©ã‹ã‚‰ç™ºç”Ÿã—ãŸã®ã‹ã‚’è¿”ã™
 	const std::wstring& GetLastEventSource() const {
 		return m_lastEventSource;
 	}
@@ -65,13 +65,13 @@ private:
 	void		_DBInit();
 	UmaEvent	_SearchEventOptions(const std::wstring& eventName);
 
-	// Œ»İ‘I‘ğ’†‚Ìˆç¬ƒEƒ}–º‚Ì–¼‘O
+	// ç¾åœ¨é¸æŠä¸­ã®è‚²æˆã‚¦ãƒå¨˜ã®åå‰
 	std::wstring	m_currentIkuseUmaMusume;
 	std::mutex		m_mtxName;
 
-	// ˆç¬ƒEƒ}–º
+	// è‚²æˆã‚¦ãƒå¨˜
 	CharaEventList	m_charaEventList;
-	// ƒTƒ|[ƒgƒJ[ƒh
+	// ã‚µãƒãƒ¼ãƒˆã‚«ãƒ¼ãƒ‰
 	CharaEventList	m_supportEventList;
 
 	std::wstring	m_lastEventSource;

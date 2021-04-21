@@ -1,4 +1,4 @@
-
+ï»¿
 #include "stdafx.h"
 #include "AboutDlg.h"
 #include "PreviewWindow.h"
@@ -25,7 +25,7 @@ void	LoadPointSizeFromJson(const json& json, const std::string& key, CPoint& pt,
 
 CRect AdjustBounds(const cv::Mat& srcImage, CRect bounds)
 {
-	const CSize baseSize = { 588,  1045 };	// ƒfƒoƒbƒO—p‚È‚Ì‚ÅŒˆ‚ß‘Å‚¿‚Å
+	const CSize baseSize = { 588,  1045 };	// ãƒ‡ãƒãƒƒã‚°ç”¨ãªã®ã§æ±ºã‚æ‰“ã¡ã§
 	//CSize imageSize(static_cast<int>(image->GetWidth()), static_cast<int>(image->GetHeight()));
 	CSize imageSize(srcImage.size().width, srcImage.size().height);
 	const double Xratio = static_cast<double>(imageSize.cx) / baseSize.cx;
@@ -121,11 +121,11 @@ LRESULT CAboutDlg::OnOCR(WORD, WORD, HWND, BOOL&)
 		return 0;
 	}
 
-	const bool bManualThresOnly = ::GetKeyState(VK_CONTROL) < 0;	// ctrl ‚ÅƒXƒ‰ƒCƒhƒo[OCR‚Ì‚İ
-	const bool bNoAdjustBounds = ::GetKeyState(VK_SHIFT) < 0;	// shift ‚ÅƒeƒLƒXƒg‚ğˆÍ‚í‚È‚¢
-	const bool bScale4 = ::GetKeyState(VK_MENU) < 0;		// atl ‚Å4”{Šg‘å
+	const bool bManualThresOnly = ::GetKeyState(VK_CONTROL) < 0;	// ctrl ã§ã‚¹ãƒ©ã‚¤ãƒ‰ãƒãƒ¼OCRã®ã¿
+	const bool bNoAdjustBounds = ::GetKeyState(VK_SHIFT) < 0;	// shift ã§ãƒ†ã‚­ã‚¹ãƒˆã‚’å›²ã‚ãªã„
+	const bool bScale4 = ::GetKeyState(VK_MENU) < 0;		// atl ã§4å€æ‹¡å¤§
 
-	// Ø‚è”²‚«••ÏŠ·
+	// åˆ‡ã‚ŠæŠœãï¼†å¤‰æ›
 	Utility::timer timer;
 
 	Gdiplus::Bitmap bmp(image->GetWidth(), image->GetHeight(), PixelFormat24bppRGB);
@@ -137,7 +137,7 @@ LRESULT CAboutDlg::OnOCR(WORD, WORD, HWND, BOOL&)
 	cv::Mat cutImage(srcImage, cvRectFromCRect(rcBounds));
 
 	if (index == kEventNameBounds /*|| index == kCurrentMenuBounds*/) {
-		if (!bNoAdjustBounds) {	// ƒeƒLƒXƒg‚ğ³ŠmˆÍ‚Ş
+		if (!bNoAdjustBounds) {	// ãƒ†ã‚­ã‚¹ãƒˆã‚’æ­£ç¢ºå›²ã‚€
 			CRect rcAdjustTextBounds = GetTextBounds(cutImage, rcBounds);
 			rcBounds = rcAdjustTextBounds;
 
@@ -178,7 +178,7 @@ LRESULT CAboutDlg::OnOCR(WORD, WORD, HWND, BOOL&)
 		cv::threshold(grayImage, manualThresholdImage, threshold, 255.0, cv::THRESH_BINARY);
 
 
-		ATLTRACE(L"Ø‚è”²‚«•ÏŠ· %s\n", UTF16fromUTF8(timer.format()).c_str());
+		ATLTRACE(L"åˆ‡ã‚ŠæŠœãå¤‰æ› %s\n", UTF16fromUTF8(timer.format()).c_str());
 
 		cv::imshow("1", cutImage);
 		cv::imshow("2", resizedImage);
